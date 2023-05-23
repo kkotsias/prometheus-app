@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, Pressable, Image, ImageBackground } from 'react-native'
+import { StyleSheet, Text, View, TextInput, Pressable, Image, ImageBackground, StatusBar } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import logo from '../assets/prometheuslogo.png'
 import { useNavigation } from '@react-navigation/native';
@@ -14,11 +14,13 @@ export default function Login() {
         await SecureStore.setItemAsync('username', username);
 
         navigation.navigate('Home')
-        
+
     }
 
     return (
-        <>   
+        <>
+
+            <StatusBar translucent backgroundColor="black" />
             <View style={styles.container}>
 
                 <Image source={logo} style={{ width: 200, height: 200, alignSelf: 'center', marginBottom: 30, }} />

@@ -7,6 +7,9 @@ import axios from 'axios';
 import * as Location from 'expo-location';
 import * as SecureStore from 'expo-secure-store';
 import CarEmergency from './CarEmergency';
+import { StatusBar } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useIsFocused } from '@react-navigation/native';
 
 
 
@@ -14,16 +17,26 @@ const screen = Dimensions.get('window');
 
 export default function Home() {
 
+  const navigation = useNavigation();
   const [location, setLocation] = useState(null);
   const [username, setUsername] = useState('');
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     const getUsername = async () => {
-      const username = await SecureStore.getItemAsync('username');
-      setUsername(username);
+      const user = await SecureStore.getItemAsync('username');
+      setUsername(user);
     };
+
+    // Fetch username on initial mount
     getUsername();
-  }, []);
+
+    // Fetch username every time the screen receives focus
+    const unsubscribe = navigation.addListener('focus', getUsername);
+
+    // Clean up the event listener when the component unmounts
+    return () => unsubscribe();
+  }, [navigation]);
 
 
   const getCurrentLocation = async () => {
@@ -76,8 +89,11 @@ export default function Home() {
 
   return (
     <View style={{ justifyContent: 'center', display: 'flex' }}>
+      <StatusBar translucent backgroundColor="black" />
       <View style={{ position: 'absolute', top: screen.height * 0.1, width: screen.width, justifyContent: 'center' }}>
-        <Image source={require('../assets/prometheuslogo.png')} style={{ width: 70, height: 70, position: 'absolute', right: screen.width * 0.09 }} />
+        <TouchableOpacity onPress={() => navigation.navigate('Login')} style={{ position: 'absolute', right: screen.width * 0.09 }}>
+          <Image source={require('../assets/prometheuslogo.png')} style={{ width: 70, height: 70, }} />
+        </TouchableOpacity>
 
         <Text style={{ fontSize: 22, paddingLeft: screen.width * 0.09 }}>Hey, {username}</Text>
         <View style={{ alignItems: 'center' }}>
@@ -91,11 +107,11 @@ export default function Home() {
       <View style={{ alignItems: 'center' }}>
 
 
-        <TouchableOpacity style={{ display: 'flex', alignItems: 'center', position: 'absolute', top: screen.height * 0.35 }} onPress={() => handleEmergency('⚠️EMERGENCY⚠️', username + 'is experiencing an emergency in this location.')}>
+        <TouchableOpacity style={{ display: 'flex', alignItems: 'center', position: 'absolute', top: screen.height * 0.35 }} onPress={() => handleEmergency('⚠️EMERGENCY⚠️', username + ' is experiencing an emergency in this location.')}>
           <FontAwesome name="warning" size={150} color="darkred" />
           <Text style={{ fontSize: 22 }}>Emergency Button</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={openModal}style={{ display: 'flex', alignItems: 'center', position: 'absolute', top: screen.height * 0.7 }}>
+        <TouchableOpacity onPress={openModal} style={{ display: 'flex', alignItems: 'center', position: 'absolute', top: screen.height * 0.7 }}>
           <FontAwesome5 name="car" size={80} color="black" />
           <Text style={{ fontSize: 22 }}>Car Emergency</Text>
         </TouchableOpacity>

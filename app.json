@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "prometheus-app",
+    "name": "Prometheus Emergency App",
     "slug": "prometheus-app",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/prometheuslogo.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.kotsias31.prometheusapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "5aa7aed4-ba90-4629-83ff-e8d8d6139116"
+      }
     }
   }
 }
