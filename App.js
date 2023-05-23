@@ -23,7 +23,6 @@ export default function App() {
     Notifications.requestPermissionsAsync()
       .then(statusObj => {
         console.log('Permission status:', statusObj);
-
         // Generate a push notification token
         return Notifications.getExpoPushTokenAsync();
       })
