@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Touchable, Image } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Touchable, Image, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { FontAwesome } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -6,6 +6,7 @@ import { Dimensions } from 'react-native';
 import axios from 'axios';
 import * as Location from 'expo-location';
 import * as SecureStore from 'expo-secure-store';
+import CarEmergency from './CarEmergency';
 
 
 
@@ -61,11 +62,17 @@ export default function Home() {
     await getCurrentLocation();
     if (location) {
       await sendPushNotification(title, body, location);
-    } else{
+      Alert.alert('Emergency Sent', 'Your emergency has been sent to your teammates.')
+    } else {
       console.log('No location found')
+      Alert.alert('Try Again', 'We had trouble accessing your location.')
     }
   }
 
+  const [modalVisible, setModalVisible] = useState(false);
+  const openModal = () => {
+    setModalVisible(true);
+  };
 
   return (
     <View style={{ justifyContent: 'center', display: 'flex' }}>
@@ -78,6 +85,9 @@ export default function Home() {
           <View style={{ borderBottomColor: 'black', borderBottomWidth: 1, top: screen.height * 0.05, width: screen.width * 0.9 }} />
         </View>
       </View>
+
+      <CarEmergency modalVisible={modalVisible} setModalVisible={setModalVisible} />
+
       <View style={{ alignItems: 'center' }}>
 
 
@@ -85,7 +95,7 @@ export default function Home() {
           <FontAwesome name="warning" size={150} color="darkred" />
           <Text style={{ fontSize: 22 }}>Emergency Button</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{ display: 'flex', alignItems: 'center', position: 'absolute', top: screen.height * 0.7 }}>
+        <TouchableOpacity onPress={openModal}style={{ display: 'flex', alignItems: 'center', position: 'absolute', top: screen.height * 0.7 }}>
           <FontAwesome5 name="car" size={80} color="black" />
           <Text style={{ fontSize: 22 }}>Car Emergency</Text>
         </TouchableOpacity>
