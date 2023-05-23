@@ -2,15 +2,17 @@ import { StyleSheet, Text, View, TextInput, Pressable, Image, ImageBackground } 
 import React, { useEffect, useState } from 'react'
 import logo from '../assets/prometheuslogo.png'
 import { useNavigation } from '@react-navigation/native';
+import * as SecureStore from 'expo-secure-store';
 
 export default function Login() {
 
     const navigation = useNavigation();
     const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
         console.log('pressed login')
+        await SecureStore.setItemAsync('username', username);
+
         navigation.navigate('Home')
         
     }
@@ -22,8 +24,7 @@ export default function Login() {
                 <Image source={logo} style={{ width: 200, height: 200, alignSelf: 'center', marginBottom: 30, }} />
                 <View style={{ marginBottom: 70, alignItems: 'center' }}>
                     <TextInput style={styles.textinput} placeholder='Username' onChangeText={setUsername} />
-                    <TextInput style={styles.textinput} placeholder='Password' onChangeText={setPassword} />
-                    <Pressable style={styles.button} title='Login' onPress={handleLogin} disabled={!username || !password}>
+                    <Pressable style={styles.button} title='Login' onPress={handleLogin} disabled={!username}>
                         <Text style={{ color: 'white' }}>Login</Text>
                     </Pressable>
                 </View>
