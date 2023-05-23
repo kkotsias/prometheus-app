@@ -18,19 +18,6 @@ export default function App() {
 
   const [initialRouteName, setInitialRouteName] = useState('Login');
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    // Request permission to send push notifications
-    Notifications.requestPermissionsAsync()
-      .then(statusObj => {
-        console.log('Permission status:', statusObj);
-        // Generate a push notification token
-        return Notifications.getExpoPushTokenAsync();
-      })
-      .then(token => {
-        console.log('Push notification token:', token);
-      })
-      .catch(err => console.error('Error getting permissions/token:', err));
-  }, []);
 
   registerNNPushToken(8184, '4UJR6FbtdJIDT60Z22jhEO');
   let pushDataObject = getPushDataObject();

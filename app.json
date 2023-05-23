@@ -27,7 +27,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.kotsias31.prometheusapp",
-      "googleServucesFile": "./google-services.json",
+      "googleServicesFile": "./google-services.json",
       "versionCode": 1
     },
     "web": {
