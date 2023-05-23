@@ -2,7 +2,11 @@
   "expo": {
     "name": "Prometheus Emergency App",
     "slug": "prometheus-app",
-    "version": "1.0.1",
+    "version": "1.0.2",
+    "permissions": [
+      "NOTIFICATIONS",
+      "LOCATION"
+    ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
