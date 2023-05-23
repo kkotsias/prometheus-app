@@ -1,11 +1,19 @@
 import { StyleSheet, Text, View, TextInput, Pressable, Image, ImageBackground } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import logo from '../assets/prometheuslogo.png'
+import { useNavigation } from '@react-navigation/native';
 
 export default function Login() {
 
+    const navigation = useNavigation();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    const handleLogin = () => {
+        console.log('pressed login')
+        navigation.navigate('Home')
+        
+    }
 
     return (
         <>   
@@ -15,7 +23,7 @@ export default function Login() {
                 <View style={{ marginBottom: 70, alignItems: 'center' }}>
                     <TextInput style={styles.textinput} placeholder='Username' onChangeText={setUsername} />
                     <TextInput style={styles.textinput} placeholder='Password' onChangeText={setPassword} />
-                    <Pressable style={styles.button} title='Login' disabled={!username || !password}>
+                    <Pressable style={styles.button} title='Login' onPress={handleLogin} disabled={!username || !password}>
                         <Text style={{ color: 'white' }}>Login</Text>
                     </Pressable>
                 </View>
