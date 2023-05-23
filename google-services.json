@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "750595170879",
+    "project_id": "prometheus-emergency-app",
+    "storage_bucket": "prometheus-emergency-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750595170879:android:6d6509d9ffde4a82bfce8a",
+        "android_client_info": {
+          "package_name": "com.kotsias31.prometheusapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "750595170879-f7k1r4f6lu0bhdd93l9db7fb3srtn87p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVZSeef-gwrEi-tz-Nu2RYp6Hu_S6I160"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "750595170879-f7k1r4f6lu0bhdd93l9db7fb3srtn87p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

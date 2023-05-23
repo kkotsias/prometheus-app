@@ -26,7 +26,9 @@
         "foregroundImage": "./assets/prometheuslogo.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.kotsias31.prometheusapp"
+      "package": "com.kotsias31.prometheusapp",
+      "googleServucesFile": "./google-services.json",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
